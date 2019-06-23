@@ -71,7 +71,7 @@ const addEvents = () => {
 };
 const showFriends = (friends, birthdayId) => {
   let domString = '<div class="col-6 offset-3">';
-  domString += '<h2>Friends</h2>';
+  domString += '<h2>Invited friends</h2>';
   domString += '<button id="add-friend-button" class="btn btn-info">Add Friend</button>';
   domString += `<table class="table table-striped" id=${birthdayId}>`;
   domString += '<thead>';
@@ -114,12 +114,13 @@ const showFriends = (friends, birthdayId) => {
 const getFriends = (uid) => {
   friendsData.getFriendsByUid(uid)
     .then((friends) => {
-      birthdayData.getBirthdayByUid(uid).then((bday) => {
-        rsvpData.getRsvpsByBirthdayId(bday.id).then((rsvps) => {
-          const finalFriends = SMASH.friendRsvps(friends, rsvps);
-          showFriends(finalFriends, bday.id);
+      birthdayData.getBirthdayByUid(uid)
+        .then((bday) => {
+          rsvpData.getRsvpsByBirthdayId(bday.id).then((rsvps) => {
+            const finalFriends = SMASH.friendRsvps(friends, rsvps);
+            showFriends(finalFriends, bday.id);
+          });
         });
-      });
     })
     .catch(err => console.error('no friends', err));
 };

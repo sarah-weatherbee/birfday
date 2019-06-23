@@ -1,9 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-  background-color: lightcoral;
+  background-color: #fea49f;
 }
 
 .hide {
   display: none;
+}
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
